@@ -2,48 +2,115 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Le site de Amine</title>
+  <title>Glowraïa Boutique</title>
   <style>
     body {
-      background-color: #fce4ec;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff0f5;
       color: #333;
-      font-family: 'Arial', sans-serif;
+      padding: 20px;
       text-align: center;
-      padding: 50px;
     }
-
     h1 {
-      color: #d81b60;
+      color: #c71585;
     }
-
-    img {
-      width: 300px;
+    .products {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .product {
+      background: white;
       border-radius: 10px;
-      margin: 20px auto;
+      width: 250px;
+      padding: 15px;
+      box-shadow: 0 0 10px #ddd;
     }
-
+    .product img {
+      width: 100%;
+      border-radius: 8px;
+    }
+    .product h2 {
+      font-size: 18px;
+      color: #c71585;
+    }
+    .product .price {
+      font-weight: bold;
+      margin: 10px 0;
+    }
     .btn {
-      background-color: #d81b60;
+      background-color: #c71585;
       color: white;
-      padding: 10px 20px;
       border: none;
+      padding: 10px;
       border-radius: 5px;
-      text-decoration: none;
-      font-size: 16px;
+      cursor: pointer;
     }
-
-    .btn:hover {
-      background-color: #ad1457;
+    #cart {
+      margin-top: 30px;
     }
   </style>
 </head>
 <body>
-  <h1>Bienvenue sur le site d’Amine !</h1>
-  <p>Ce site a été créé gratuitement avec ❤️ et GitHub Pages !</p>
 
-  <img src="https://placekitten.com/400/300" alt="Une image sympa">
+  <h1>Bienvenue sur Glowraïa Boutique ✨</h1>
 
-  <br><br>
-  <a href="https://youtube.com" class="btn">Visiter ma chaîne YouTube</a>
+  <div class="products">
+    <div class="product">
+      <img src="https://placekitten.com/250/200" alt="Bonnet en laine">
+      <h2>Bonnet en laine</h2>
+      <p class="price">15 €</p>
+      <button class="btn" onclick="addToCart('Bonnet en laine', 15)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://placekitten.com/251/200" alt="Mitaines douces">
+      <h2>Mitaines douces</h2>
+      <p class="price">12 €</p>
+      <button class="btn" onclick="addToCart('Mitaines douces', 12)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://placekitten.com/252/200" alt="Écharpe tricotée">
+      <h2>Écharpe tricotée</h2>
+      <p class="price">18 €</p>
+      <button class="btn" onclick="addToCart('Écharpe tricotée', 18)">Ajouter au panier</button>
+    </div>
+    <div class="product">
+      <img src="https://placekitten.com/253/200" alt="Sac tricoté">
+      <h2>Sac tricoté</h2>
+      <p class="price">25 €</p>
+      <button class="btn" onclick="addToCart('Sac tricoté', 25)">Ajouter au panier</button>
+    </div>
+  </div>
+
+  <div id="cart">
+    <h2>🛒 Panier</h2>
+    <ul id="cart-items"></ul>
+    <p><strong>Total :</strong> <span id="total">0</span> €</p>
+  </div>
+
+  <script>
+    const cartItems = [];
+    let total = 0;
+
+    function addToCart(name, price) {
+      cartItems.push({ name, price });
+      total += price;
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById('cart-items');
+      cartList.innerHTML = '';
+      cartItems.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - ${item.price} €`;
+        cartList.appendChild(li);
+      });
+      document.getElementById('total').textContent = total;
+    }
+  </script>
+
 </body>
 </html>
